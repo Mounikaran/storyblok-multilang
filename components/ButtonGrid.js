@@ -1,18 +1,18 @@
 import DynamicComponent from "./DynamicComponent";
 import { sbEditable } from "@storyblok/storyblok-editable";
 
-const Grid = ({ blok }) => (
-  <ul
+const ButtonGrid = ({ blok }) => (
+  <div
     {...sbEditable(blok)}
     key={blok._uid}
-    className="flex py-8 mb-6 container relative mx-auto z-30"
+    className="flex justify-center py-8 mb-6 container mx-auto"
   >
     {blok.columns.map((nestedBlok) => (
-      <li key={nestedBlok._uid} className="flex-auto px-6">
+      <div key={nestedBlok._uid} className="px-2">
         <DynamicComponent blok={nestedBlok} />
-      </li>
+      </div>
     ))}
-  </ul>
+  </div>
 );
 
-export default Grid;
+export default ButtonGrid;

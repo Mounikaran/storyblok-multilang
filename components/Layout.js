@@ -1,17 +1,12 @@
 import Head from "../components/Head";
-import Navigation from "../components/Navigation";
+// import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
 const Layout = ({ children, locale, locales, defaultLocale }) => (
-  <div className="bg-gray-300">
+  <div className="bg-purple-300">
     <Head />
-    <Navigation
-      locale={locale}
-      locales={locales}
-      defaultLocale={defaultLocale}
-    />
     {children}
-    <Footer />
+    <Footer locale={locale} locales={locales} defaultLocale={defaultLocale} />
   </div>
 );
 
