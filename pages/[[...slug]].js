@@ -43,8 +43,8 @@ export async function getStaticProps({
     sbParams.cv = Date.now();
   }
 
-  let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
-
+  const { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
+  // console.log(data.story.content.body.map((body)=>(body.columns)))
   return {
     props: {
       story: data ? data.story : false,
@@ -53,14 +53,15 @@ export async function getStaticProps({
       locales,
       defaultLocale,
     },
-    revalidate: 3600, // revalidate every hour
+    revalidate: 10, // revalidate every 10 seconds
   };
 }
 
 export async function getStaticPaths({ locales }) {
   let { data } = await Storyblok.get("cdn/links/");
 
-  let paths = [];
+  let paths = []
+
   Object.keys(data.links).forEach((linkKey) => {
     if (data.links[linkKey].is_folder) {
       return;
@@ -76,7 +77,7 @@ export async function getStaticPaths({ locales }) {
       paths.push({ params: { slug: splittedSlug }, locale });
     }
   });
-
+  
   return {
     paths: paths,
     fallback: false,
